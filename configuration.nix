@@ -49,6 +49,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.pcscd.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.xserver = {
@@ -135,6 +136,7 @@
     pulseaudio
     xfce.xfce4-pulseaudio-plugin
     xfce.xfce4-volumed-pulse
+    pinentry-curses
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

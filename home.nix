@@ -91,6 +91,14 @@
     enable = true;
   };
 
+  programs.git = {
+    enable = true;
+    userName = "Jamie Atkinson";
+    userEmail = "jabbslad@gmail.com";
+    signing.key = null;
+    signing.signByDefault = true;
+  };
+
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
