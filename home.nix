@@ -46,6 +46,8 @@
     rustup
     font-awesome
     nerdfonts
+
+    zoom-us
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -104,10 +106,11 @@
     package = pkgs.i3-gaps;
     config = {
       modifier = "Mod4";
+      terminal = "kitty";
       # window.border = 0;
       window.titlebar = false;
       keybindings = let modifier = config.xsession.windowManager.i3.config.modifier; in lib.mkOptionDefault {
-        "${modifier}+Return" = "exec kitty";
+        "${modifier}+Return" = "exec ${config.xsession.windowManager.i3.config.terminal}";
         "${modifier}+Shift+Return" = "exec brave";
         "${modifier}+0" = "workspace number 0";
         "${modifier}+Shift+0" = "move container to workspace number 0";
