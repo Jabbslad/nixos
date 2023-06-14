@@ -48,6 +48,7 @@
     nerdfonts
 
     zoom-us
+    slack
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -81,6 +82,8 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "1password"
+    "zoom"
+    "slack"
   ];
 
   # Let Home Manager install and manage itself.
