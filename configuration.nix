@@ -50,6 +50,7 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.pcscd.enable = true;
+  services.blueman.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.xserver = {

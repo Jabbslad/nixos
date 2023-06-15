@@ -148,11 +148,6 @@
         };
         blocks = [
          {
-            block = "pomodoro";
-            notify_cmd = "i3-nagbar -m '{msg}'";
-            blocking_cmd = true;
-         }
-         {
            block = "cpu";
            interval = 10;
            format = " $icon $utilization ";
