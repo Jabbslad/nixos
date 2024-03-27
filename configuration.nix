@@ -8,16 +8,12 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <home-manager/nixos>
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # Setup keyfile
-  boot.initrd.secrets = {
-    "/crypto_keyfile.bin" = null;
-  };
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -48,40 +44,41 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.pcscd.enable = true;
-  services.blueman.enable = true;
+  #services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.xserver = {
-    desktopManager = {
-      xterm.enable = false;
-      xfce = {
-        enable = true;
-	noDesktop = true;
-	enableXfwm = false;
-      };
-    };
+    	layout = "gb";
+    	xkbVariant = "";
+  	enable = true;
+	desktopManager = {
+		xterm.enable = false;
+		xfce = {
+			enable = true;
+			noDesktop = true;
+			enableXfwm = false;
+		};
+	};
 
-    displayManager = {
-      defaultSession = "xfce+i3";
-    };
+	displayManager = {
+		lightdm.enable = true;
+		defaultSession = "xfce+i3";
+	};
 
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu #application launcher most people use
-        i3lock #default i3 screen locker
-     ];
-    };
+	windowManager.i3 = {
+      		enable = true;
+		package = pkgs.i3-gaps;
+      		extraPackages = with pkgs; [
+        		dmenu #application launcher most people use
+        		i3lock #default i3 screen locker
+        		i3blocks #if you are planning on using i3blocks over i3status
+     		];
+    	};
+	libinput.touchpad.naturalScrolling = true;
   };
 
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
+  # Configure console keymap
+  console.keyMap = "uk";
 
   # Enable CUPS to print documents.
   services.printing.enable = false;
@@ -106,16 +103,14 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  programs.dconf.enable = true;
-
-  programs.zsh.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jabbslad = {
     isNormalUser = true;
-    description = "Jamie Atkinson";
+    description = "Jamie";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
+      firefox
     #  thunderbird
     ];
   };
@@ -127,25 +122,23 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    unzip
-    zsh
-    gcc-unwrapped
-    binutils-unwrapped
-    lxappearance
-    pulseaudio
-    xfce.xfce4-pulseaudio-plugin
-    xfce.xfce4-volumed-pulse
-    pinentry-curses
+  #  wget
+  	pavucontrol
   ];
+
+  environment.pathsToLink = [ "/libexec" ];
+
+  programs.zsh.enable = true;
+
+  services.mullvad-vpn.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
 
   # List services that you want to enable:
 
@@ -164,6 +157,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 
 }
