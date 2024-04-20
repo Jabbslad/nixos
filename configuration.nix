@@ -124,6 +124,7 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
   	pavucontrol
+	man-pages
   ];
 
   environment.pathsToLink = [ "/libexec" ];
@@ -131,6 +132,12 @@
   programs.zsh.enable = true;
 
   services.mullvad-vpn.enable = true;
+
+  documentation = {
+  	dev.enable = true;
+	man.generateCaches = true;
+	nixos.includeAllModules = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
