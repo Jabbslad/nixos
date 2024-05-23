@@ -35,6 +35,14 @@ in {
         "XF86AudioMute" = "exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
         "XF86AudioMicMute" = "exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
       };
+      	startup = [
+		{
+		  command =
+		    "${pkgs.feh}/bin/feh --bg-fill ~/wallpaper-CS2420.jpg wallpaper-AW3420.jpg";
+		  always = true;
+		  notification = false;
+		}
+	];
 
       bars = [
         {

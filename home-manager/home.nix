@@ -39,8 +39,10 @@
     _1password-gui
     unzip
     signal-desktop
+    feh
 
     transmission-gtk
+    ripgrep
 
     font-awesome
     jetbrains-mono
@@ -51,6 +53,8 @@
     gcc
 
     erlang_26
+
+    vulkan-loader # needed for Zed
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -96,6 +100,8 @@
     EDITOR = "nvim";
     TERMINAL = "kitty";
     BROWSER = "/home/jabbslad/.nix-profile/bin/brave";
+    LD_LIBRARY_PATH= "${pkgs.vulkan-loader}/lib";
+    LIBRARY_PATH= "${pkgs.vulkan-loader}/lib";
   };
 
   programs.ssh = {

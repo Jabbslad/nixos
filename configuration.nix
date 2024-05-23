@@ -83,6 +83,10 @@
   # Enable CUPS to print documents.
   services.printing.enable = false;
 
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  services.blueman.enable = true;
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -99,6 +103,8 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+  services.auto-cpufreq.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
