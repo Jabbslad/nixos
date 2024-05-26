@@ -105,12 +105,18 @@
     BROWSER = "/home/jabbslad/.nix-profile/bin/brave";
     LD_LIBRARY_PATH= "${pkgs.vulkan-loader}/lib";
     LIBRARY_PATH= "${pkgs.vulkan-loader}/lib";
+    SSH_ASKPASS="";
   };
 
   programs.git = {
     enable = true;
     userName = "Jabbslad";
     userEmail = "jabbslad@gmail.com";
+    extraConfig = {
+      credential.helper = "${
+          pkgs.git.override { withLibsecret = true; }
+        }/bin/git-credential-libsecret";
+    };
   };
 
   programs.ssh = {
