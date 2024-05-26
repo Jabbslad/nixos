@@ -48,7 +48,7 @@
 
   # Enable the GNOME Desktop Environment.
   services.xserver = {
-    	layout = "gb";
+    	layout = "us";
     	xkbVariant = "";
   	enable = true;
 	desktopManager = {
@@ -78,7 +78,7 @@
   };
 
   # Configure console keymap
-  console.keyMap = "uk";
+  console.keyMap = "us";
 
   # Enable CUPS to print documents.
   services.printing.enable = false;
@@ -105,6 +105,7 @@
   };
 
   services.auto-cpufreq.enable = true;
+  services.thermald.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -131,6 +132,10 @@
   #  wget
   	pavucontrol
 	man-pages
+	powertop
+	neofetch
+	inxi
+	pciutils
   ];
 
   environment.pathsToLink = [ "/libexec" ];
