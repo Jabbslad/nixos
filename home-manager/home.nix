@@ -40,6 +40,7 @@
     unzip
     signal-desktop
     feh
+    libsecret
 
     transmission-gtk
     ripgrep
@@ -104,6 +105,12 @@
     BROWSER = "/home/jabbslad/.nix-profile/bin/brave";
     LD_LIBRARY_PATH= "${pkgs.vulkan-loader}/lib";
     LIBRARY_PATH= "${pkgs.vulkan-loader}/lib";
+  };
+
+  programs.git = {
+    enable = true;
+    userName = "Jabbslad";
+    userEmail = "jabbslad@gmail.com";
   };
 
   programs.ssh = {
