@@ -1,16 +1,14 @@
 icons_format = "{icon}"
 
 [theme]
-theme = "solarized-dark"
+theme = "gruvbox-dark"
 [theme.overrides]
-idle_bg = "#123456"
-idle_fg = "#abcdef"
+#separator = " "
+#idle_bg = "#123456"
+#idle_fg = "#abcdef"
 
 [icons]
-icons = "awesome4"
-[icons.overrides]
-#bat = ["|E|", "|_|", "|=|", "|F|"]
-#bat_charging = "|^| "
+icons = "material-nf"
 
 [[block]]
 block = "cpu"

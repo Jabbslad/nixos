@@ -46,6 +46,8 @@
   # Enable the X11 windowing system.
   #services.xserver.enable = true;
 
+  programs.dconf.enable = true;
+
   # Enable the GNOME Desktop Environment.
   services.xserver = {
 	xkb = {

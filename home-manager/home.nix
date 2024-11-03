@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
-  unstable = import <nixpkgs-unstable> {};
-in 
+  unstable = import <nixos-unstable> {};
+in
 {
   imports = [ ./zsh.nix ./i3.nix ];
   nix = {
@@ -31,11 +31,11 @@ in
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
-    git
     curl
     wget
     brave
     lxappearance
+    papirus-icon-theme
     networkmanagerapplet
     _1password
     _1password-gui
@@ -62,8 +62,17 @@ in
 
     zoom-us
 
+    discord
+
     unstable.zig
     unstable.rustup
+
+    unstable.zed-editor
+    unstable.nixd
+    nixfmt-classic
+    imhex
+    openssl
+    pkg-config
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -112,9 +121,10 @@ in
     LD_LIBRARY_PATH= "${pkgs.vulkan-loader}/lib";
     LIBRARY_PATH= "${pkgs.vulkan-loader}/lib";
     SSH_ASKPASS="";
+    PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig";
   };
 
-   home.sessionPath = ["$HOME/.cargo/bin"];
+   home.sessionPath = ["$HOME/.cargo/bin" "$HOME/.bin"];
 
   programs.git = {
     enable = true;
@@ -122,7 +132,7 @@ in
     userEmail = "jabbslad@gmail.com";
     extraConfig = {
       credential.helper = "${
-          pkgs.git.override { withLibsecret = true; }
+          pkgs.gitFull
         }/bin/git-credential-libsecret";
     };
   };
@@ -140,6 +150,9 @@ Host github.com
     enable = true;
     autosuggestion.enable = true;
     enableCompletion = true;
+    shellAliases = {
+        zed = "zeditor";
+    };
 
     initExtra = ''
     	bindkey '^R' history-incremental-search-backward
@@ -163,4 +176,12 @@ Host github.com
   };
 
   fonts.fontconfig.enable = true;
+
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+  };
 }
