@@ -49,6 +49,11 @@ in {
 
       bars = [{
         colors.background = "#282828";
+        colors.focusedWorkspace = {
+          border = "#4c7899";
+          background = "#98971a";
+          text = "#ffffff";
+        };
         fonts = {
           names = [ "PowerlineSymbols" ];
           size = 9.1;
@@ -61,7 +66,7 @@ in {
     extraConfig = ''
       default_border pixel 0
       default_floating_border pixel 0
-      gaps inner 6
+      gaps inner 3
       gaps outer 1'';
   };
 }

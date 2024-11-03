@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
-let
-  unstable = import <nixos-unstable> {};
-in
-{
+let unstable = import <nixos-unstable> { };
+in {
   imports = [ ./zsh.nix ./i3.nix ];
   nix = {
     package = pkgs.nix;
@@ -56,9 +54,9 @@ in
 
     gcc
 
-    erlang_26
+    #erlang_26
 
-    vulkan-loader # needed for Zed
+    #vulkan-loader # needed for Zed
 
     zoom-us
 
@@ -118,31 +116,29 @@ in
     EDITOR = "nvim";
     TERMINAL = "kitty";
     BROWSER = "/home/jabbslad/.nix-profile/bin/brave";
-    LD_LIBRARY_PATH= "${pkgs.vulkan-loader}/lib";
-    LIBRARY_PATH= "${pkgs.vulkan-loader}/lib";
-    SSH_ASKPASS="";
-    PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig";
+    #LD_LIBRARY_PATH= "${pkgs.vulkan-loader}/lib";
+    #LIBRARY_PATH= "${pkgs.vulkan-loader}/lib";
+    SSH_ASKPASS = "";
+    PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
   };
 
-   home.sessionPath = ["$HOME/.cargo/bin" "$HOME/.bin"];
+  home.sessionPath = [ "$HOME/.cargo/bin" "$HOME/.bin" ];
 
   programs.git = {
     enable = true;
     userName = "Jabbslad";
     userEmail = "jabbslad@gmail.com";
     extraConfig = {
-      credential.helper = "${
-          pkgs.gitFull
-        }/bin/git-credential-libsecret";
+      credential.helper = "${pkgs.gitFull}/bin/git-credential-libsecret";
     };
   };
 
   programs.ssh = {
     enable = true;
     extraConfig = ''
-Host github.com
-  ForwardAgent yes
-  IdentitiesOnly yes
+      Host github.com
+        ForwardAgent yes
+        IdentitiesOnly yes
     '';
   };
 
@@ -150,12 +146,10 @@ Host github.com
     enable = true;
     autosuggestion.enable = true;
     enableCompletion = true;
-    shellAliases = {
-        zed = "zeditor";
-    };
+    shellAliases = { zed = "zeditor"; };
 
     initExtra = ''
-    	bindkey '^R' history-incremental-search-backward
+      bindkey '^R' history-incremental-search-backward
     '';
   };
 
@@ -163,16 +157,14 @@ Host github.com
   programs.home-manager.enable = true;
   programs.neovim.enable = true;
   programs.kitty = {
-  	enable = true;
-  	theme = "Gruvbox Dark";
-	font = {
-		name = "Jetbrains Mono";
-	};
-	settings = {
-	  scrollback_lines = 10000;
-          enable_audio_bell = false;
-          update_check_interval = 0;
-	};
+    enable = true;
+    theme = "Gruvbox Dark";
+    font = { name = "Jetbrains Mono"; };
+    settings = {
+      scrollback_lines = 10000;
+      enable_audio_bell = false;
+      update_check_interval = 0;
+    };
   };
 
   fonts.fontconfig.enable = true;
