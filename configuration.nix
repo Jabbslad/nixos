@@ -46,10 +46,14 @@
   # Enable the X11 windowing system.
   #services.xserver.enable = true;
 
+  programs.dconf.enable = true;
+
   # Enable the GNOME Desktop Environment.
   services.xserver = {
-    	layout = "gb";
-    	xkbVariant = "";
+	xkb = {
+		variant = "";
+    		layout = "us";
+	};
   	enable = true;
 	desktopManager = {
 		xterm.enable = false;
@@ -60,10 +64,7 @@
 		};
 	};
 
-	displayManager = {
-		lightdm.enable = true;
-		defaultSession = "xfce+i3";
-	};
+	displayManager.lightdm.enable = true;
 
 	windowManager.i3 = {
       		enable = true;
@@ -74,14 +75,19 @@
         		i3blocks #if you are planning on using i3blocks over i3status
      		];
     	};
-	libinput.touchpad.naturalScrolling = true;
   };
+  services.libinput.touchpad.naturalScrolling = true;
+  services.displayManager.defaultSession = "xfce+i3";
 
   # Configure console keymap
-  console.keyMap = "uk";
+  console.keyMap = "us";
 
   # Enable CUPS to print documents.
   services.printing.enable = false;
+
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  services.blueman.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -99,6 +105,12 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+  services.auto-cpufreq.enable = true;
+  services.thermald.enable = true;
+
+  services.dbus.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -125,6 +137,10 @@
   #  wget
   	pavucontrol
 	man-pages
+	powertop
+	neofetch
+	inxi
+	pciutils
   ];
 
   environment.pathsToLink = [ "/libexec" ];
@@ -164,6 +180,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 
 }
