@@ -50,9 +50,9 @@ in {
       bars = [{
         colors.background = "#282828";
         colors.focusedWorkspace = {
-          border = "#4c7899";
-          background = "#98971a";
-          text = "#ffffff";
+          border = "#ebdbb2";
+          background = "#458588";
+          text = "#ebdbb2";
         };
         fonts = {
           names = [ "PowerlineSymbols" ];
